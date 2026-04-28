@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    Rigidbody rb;
+    void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Launch(Vector3 velocity)
     {
-        
+        rb.linearVelocity = velocity;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Target"))
+        {
+            Debug.Log("HIT");
+        }
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("MISS");
+        }
     }
 }

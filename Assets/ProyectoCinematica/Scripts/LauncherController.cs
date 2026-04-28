@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class LauncherController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public ProjectileController projectilePrefab;
+    public Transform spawnPoint;
+    public float launchForce = 10f;
 
-    // Update is called once per frame
-    void Update()
+    public void Launch()
     {
-        
+        ProjectileController proj = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+        Vector3 direction = transform.forward;
+        proj.Launch(direction * launchForce);
     }
 }
