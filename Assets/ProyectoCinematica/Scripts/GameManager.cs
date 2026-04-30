@@ -1,10 +1,50 @@
 using UnityEngine;
 
+public enum GameState
+{
+    Aiming,
+    Launched,
+    Win,
+    Lose
+}
+
 public class GameManager : MonoBehaviour
 {
-    public enum GameState
+    public static GameManager Instance;
+    public GameState currentState;
+
+    private void Awake()
     {
-        Aiming,
-        Launched
+        Instance = this;
     }
+
+    private void Start()
+    {
+        
+    }
+    
+    public void SetState(GameState newState)
+    {
+        currentState = newState;
+        Debug.Log("Estado: " + newState);
+    }
+
+    public void OnHitTarget()
+    {
+        if (currentState != GameState.Launched) return;
+
+        SetState(GameState.Win);
+    }
+
+    public void OnMiss()
+    {
+        if (currentState != GameState.Launched) return;
+
+        SetState(GameState.Lose);
+    }
+
+    /*public void RestartLevel()
+    {
+
+    }*/
 }

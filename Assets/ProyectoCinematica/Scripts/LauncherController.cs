@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LauncherController : MonoBehaviour
 {
@@ -6,11 +7,56 @@ public class LauncherController : MonoBehaviour
     public Transform spawnPoint;
     public float launchForce = 10f;
 
-    public void Launch()
+    private PlayerInputActions input;
+    private ProjectileController currentProjectile;
+
+    private void Awake()
     {
-        ProjectileController proj = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        input = new PlayerInputActions();
+    }
+    void OnEnable()
+    {
+        input.Enable();
+        input.Gameplay.Shoot.performed += OnShoot;
+    }
+
+    void OnDisable()
+    {
+        input.Gameplay.Shoot.performed -= OnShoot;
+        input.Disable();
+    }
+    private void Start()
+    {
+        SpawnProjectile();
+    }
+
+    void SpawnProjectile()
+    {
+
+        currentProjectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+        Rigidbody rb = currentProjectile.GetComponent<Rigidbody>();
+        rb.isKinematic = true; //para que no caiga hasta disparar
+    }
+
+    void OnShoot(InputAction.CallbackContext context)
+    {
+        Shoot();
+    }
+
+    void Shoot()
+    {
+        if (currentProjectile == null) return;
+
+        Rigidbody rb = currentProjectile.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
 
         Vector3 direction = transform.forward;
-        proj.Launch(direction * launchForce);
+        currentProjectile.Launch(direction * launchForce);
+
+        currentProjectile = null;
+
+        //SpawnProjectile();
+        //GameManager.Instantiate.SetState(GameState.Launched);
     }
 }

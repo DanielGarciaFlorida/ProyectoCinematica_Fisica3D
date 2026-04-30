@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
 
     public void Launch(Vector3 velocity)
     {
+        rb.isKinematic = false;
         rb.linearVelocity = velocity;
     }
     void OnCollisionEnter(Collision collision)
@@ -17,10 +18,12 @@ public class ProjectileController : MonoBehaviour
         if (collision.gameObject.CompareTag("Target"))
         {
             Debug.Log("HIT");
+            //llamar al GameManager
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("MISS");
+            //llamar al GameManager
         }
     }
 }
