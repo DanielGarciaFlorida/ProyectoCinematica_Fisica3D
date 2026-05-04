@@ -3,12 +3,12 @@ using UnityEngine.InputSystem;
 
 public class LauncherController : MonoBehaviour
 {
-    public ProjectileController projectilePrefab;
+    public BallController projectilePrefab;
     public Transform spawnPoint;
     public float launchForce = 10f;
 
     private PlayerInputActions input;
-    private ProjectileController currentProjectile;
+    private BallController currentProjectile;
 
     private void Awake()
     {
