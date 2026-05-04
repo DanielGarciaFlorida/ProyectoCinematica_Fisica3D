@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectileController : MonoBehaviour
+public class BallController : MonoBehaviour
 {
     Rigidbody rb;
     void Awake()
