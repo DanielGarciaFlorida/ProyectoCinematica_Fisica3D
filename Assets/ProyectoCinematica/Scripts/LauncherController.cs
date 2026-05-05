@@ -35,10 +35,12 @@ public class LauncherController : MonoBehaviour
     void SpawnBall()
     {
         currentBall = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+        currentBall.SetLauncher(this);
     }
 
     void OnShoot(InputAction.CallbackContext context)
     {
+        Debug.Log("CLICK DETECTADO");
         Shoot();
     }
 
@@ -46,13 +48,21 @@ public class LauncherController : MonoBehaviour
     {
         if (currentBall == null) return;
 
-        Vector3 mousePos = Mouse.current.position.ReadValue();
-        Vector3 direction = (mousePos - spawnPoint.position).normalized;
+        Vector3 mousePos = GetMouseWorldPosition(); //1. Obtener la posición del mouse en el mundo
+
+        //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
+        Vector3 direction = mousePos - spawnPoint.position;
+        direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
+        direction.Normalize();
+
+        Debug.DrawLine(spawnPoint.position, mousePos, Color.red, 2f);
+        Debug.Log("Direccion: " + direction);
+
+        //3.Calcular velocidad parabólica
         Vector3 launchVelocity = CalculatedLaunchVelocity(direction);
 
-        currentBall.Launch(launchVelocity);
+        currentBall.Launch(launchVelocity); //4. Lanzar la bola
 
-        currentBall = null;
     }
 
     Vector3 CalculatedLaunchVelocity(Vector3 direction)
@@ -72,9 +82,9 @@ public class LauncherController : MonoBehaviour
 
     Vector3 GetMouseWorldPosition()
     {
-        Vector2 mousePos = inputActions.Gameplay.Position.ReadValue<Vector2>();
+        Vector2 mouseScreenPosition = inputActions.Gameplay.Position.ReadValue<Vector2>();
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
 
         float planeY = spawnPoint.position.y;
 
@@ -82,7 +92,11 @@ public class LauncherController : MonoBehaviour
 
         return ray.origin + ray.direction * distance;
 
-        Debug.DrawLine(spawnPoint.position, mousePos, Color.red);
+        //Vector3 worldPosition = ray.origin + ray.direction * distance;
+
+        //Debug.DrawLine(spawnPoint.position, worldPosition, Color.red);
+
+        //return worldPosition;
         // Plane groundPlane = new Plane(Vector3.up, spawnPoint.position);
 
         /* if(groundPlane.Raycast(ray, out float distance))
@@ -95,18 +109,17 @@ public class LauncherController : MonoBehaviour
 
     public void ResetBall()
     {
-        if (currentBall != null)
-        {
-            Destroy(currentBall.gameObject);
-        }
         SpawnBall();
     }
 
     //Necesario para calcular la trayectoria
     public Vector3 GetLaunchVelocity()
     {
-        Vector3 mousePos = Mouse.current.position.ReadValue();
-        Vector3 direction = (mousePos - spawnPoint.position).normalized;
+        Vector3 mousePos = GetMouseWorldPosition();
+
+        Vector3 direction = mousePos - spawnPoint.position;
+        direction.y = 0;
+        direction.Normalize();
         return CalculatedLaunchVelocity(direction);
     }
 }

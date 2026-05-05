@@ -29,12 +29,12 @@ public class BallController : MonoBehaviour
         float t = Time.time - launchTime;
 
         Vector3 newPosition = CalculatePosition(t);
-        //transform.position = newPosition;
+        transform.position = newPosition;
     }
 
     public void Launch(Vector3 velocity)
     {
-        rb.isKinematic = false;
+        rb.isKinematic = true;
 
         initialVelocity = velocity;
         startPosition = transform.position;

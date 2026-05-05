@@ -103,9 +103,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Position"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""9a019ca4-22d1-4fb1-a6c8-27937e1266b8"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
