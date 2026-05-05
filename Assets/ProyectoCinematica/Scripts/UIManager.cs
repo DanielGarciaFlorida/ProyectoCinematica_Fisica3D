@@ -1,16 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static UIManager Instance;
+
+    public GameObject gameOverPanel;
+
+    private void Awake()
     {
-        
+        Instance = this;
+
+        // 🔴 IMPORTANTE: ocultar al empezar
+        gameOverPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void RestartButton()
+    {
+        Time.timeScale = 1f;
+        GameManager.Instance.RestartLevel();
     }
 }
