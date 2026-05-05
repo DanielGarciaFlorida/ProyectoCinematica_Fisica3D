@@ -13,16 +13,23 @@ public class BallController : MonoBehaviour
     private Vector3 startPosition;
     private float launchTime;
 
+    LauncherController launcher;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+    public void SetLauncher(LauncherController l)
+    {
+        launcher = l;
     }
     private void Update()
     {
         if (!isLaunched) return;
 
+        float t = Time.time - launchTime;
 
-       
+        Vector3 newPosition = CalculatePosition(t);
+        //transform.position = newPosition;
     }
 
     public void Launch(Vector3 velocity)
@@ -47,13 +54,29 @@ public class BallController : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Hole"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Goal);
-            //llamar al GameManager
+            isLaunched = false;
+            if (launcher != null)
+            {
+                launcher.ResetBall();
+            }
+
+            Destroy(gameObject);
         }
-        
     }
+
+    /* Hasta que no metamos el modelo 3D de la mesa no podremos probar esta parte
+     void OnCollisionEnter(Collision collision)
+     {
+         if (collision.gameObject.CompareTag("Hole"))
+         {
+             Debug.Log("Goal");
+             //llamar al GameManager
+         }
+
+     }
+    */
 }
