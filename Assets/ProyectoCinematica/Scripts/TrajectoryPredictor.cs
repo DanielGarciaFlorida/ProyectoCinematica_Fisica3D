@@ -13,6 +13,8 @@ public class TrayectoriaBola : MonoBehaviour
     public Rigidbody bola;
 
     private LineRenderer lineRenderer;
+    public BallController ballController;
+    public LauncherController launchController;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class TrayectoriaBola : MonoBehaviour
 
     void Update()
     {
+        
         if (bola != null && bola.linearVelocity.magnitude > 0.1f)
         {
             lineRenderer.enabled = false;
@@ -33,43 +36,15 @@ public class TrayectoriaBola : MonoBehaviour
 
     void DibujarTrayectoria()
     {
-
-        lineRenderer.positionCount = numPuntos;
-
-        Vector3 direccionXZ = puntoDisparo.forward;
-        direccionXZ.y = 0;
-
-        if (direccionXZ != Vector3.zero)
+        lineRenderer.positionCount = 0;
+        if (ballController == null) return;
+        float t = 0;
+        while (t < 5)
         {
-            direccionXZ.Normalize();
-        }
-
-        Vector3 velocidadInicial = (direccionXZ * fuerza) + (Vector3.up * fuerzaSalto);
-
-        float alturaMesa = puntoDisparo.position.y;
-
-        for (int i = 0; i < numPuntos; i++)
-        {
-            float t = i * tiempoEntrePuntos;
-
-      
-            Vector3 posicion = puntoDisparo.position +
-                               velocidadInicial * t +
-                               0.5f * Physics.gravity * t * t;
-
-           
-            if (posicion.y < alturaMesa && i > 0)
-            {
-               
-                posicion.y = alturaMesa;
-                lineRenderer.SetPosition(i, posicion);
-
-              
-                lineRenderer.positionCount = i + 1;
-                break; 
-            }
-
-            lineRenderer.SetPosition(i, posicion);
+            lineRenderer.positionCount++;
+            lineRenderer.SetPosition(lineRenderer.positionCount - 1, ballController.CalculatePosition(t, launchController.GetLaunchVelocity()));
+            t += 0.1f;
         }
     }
+
 }

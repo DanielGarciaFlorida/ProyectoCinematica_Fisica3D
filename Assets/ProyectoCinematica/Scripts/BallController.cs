@@ -18,6 +18,9 @@ public class BallController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        FindAnyObjectByType<TrayectoriaBola>().ballController = this;
+        startPosition = transform.position;
     }
     public void SetLauncher(LauncherController l)
     {
@@ -29,8 +32,7 @@ public class BallController : MonoBehaviour
 
         t += Time.deltaTime;
 
-
-       if (rb.isKinematic)
+        if (rb.isKinematic)
         {
             Vector3 newPosition = CalculatePosition(t);
             transform.position = newPosition;
@@ -50,22 +52,24 @@ public class BallController : MonoBehaviour
         rb.isKinematic = true;
 
         initialVelocity = launchVelocity;
-        startPosition = transform.position;
         launchTime = Time.time;
 
         isLaunched = true;
     }
-
-    Vector3 CalculatePosition(float time)
+    public Vector3 CalculatePosition(float time, Vector3 launchVelocity)
     {
         float gravity = Physics.gravity.y;
 
-        float x = startPosition.x + initialVelocity.x * time;
-        float y = startPosition.y + initialVelocity.y * time + 0.5f * gravity * time * time;
-        float z = startPosition.z + initialVelocity.z * time;
+        float x = startPosition.x + launchVelocity.x * time;
+        float y = startPosition.y + launchVelocity.y * time + 0.5f * gravity * time * time;
+        float z = startPosition.z + launchVelocity.z * time;
 
 
         return new Vector3(x, y, z);
+    }
+    public Vector3 CalculatePosition(float time)
+    {
+        return CalculatePosition(time, initialVelocity);
     }
 
     private void OnCollisionEnter(Collision collision)

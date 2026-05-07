@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 34473287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64, y: 2.33, z: 5.98}
+  m_LocalPosition: {x: 8.27, y: 2.33, z: 11.85}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -417,11 +417,10 @@ Transform:
   m_GameObject: {fileID: 48434620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.63, y: 2.32, z: 5.04}
+  m_LocalPosition: {x: 8.26, y: 2.32, z: 10.910001}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1235729650}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &300818120
@@ -450,12 +449,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300818120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2134859124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &300818122
 MonoBehaviour:
@@ -469,12 +468,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dec0595df7a75d4b9f6cb5c4bb49f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrayectoriaBola
-  puntoDisparo: {fileID: 1235729650}
+  puntoDisparo: {fileID: 0}
   fuerza: 10
   numPuntos: 10
   tiempoEntrePuntos: 0.1
   fuerzaSalto: 2
   bola: {fileID: 48434622}
+  ballController: {fileID: 0}
+  launchController: {fileID: 1084762020}
 --- !u!120 &300818123
 LineRenderer:
   serializedVersion: 2
@@ -870,7 +871,7 @@ Transform:
   m_GameObject: {fileID: 984156659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8384, y: 0, z: -5.78234}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1049,37 +1050,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1235729649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1235729650}
-  m_Layer: 0
-  m_Name: PuntoDisparo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1235729650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235729649}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: -0.07, z: -0.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 48434626}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254793123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1137,7 @@ Transform:
   m_GameObject: {fileID: 1254793123}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.87, y: 9.62, z: 3.75}
+  m_LocalPosition: {x: 8.24, y: 9.62, z: 9.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1564,7 +1534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1652141322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1718,10 +1688,11 @@ Transform:
   m_GameObject: {fileID: 2134859123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.449, y: 2.361, z: 6.832}
+  m_LocalPosition: {x: 7.11, y: 2.361, z: 6.832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 300818121}
   m_Father: {fileID: 984156660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7414136881982193561
@@ -1801,7 +1772,6 @@ SceneRoots:
   - {fileID: 1084762021}
   - {fileID: 34473293}
   - {fileID: 48434626}
-  - {fileID: 300818121}
   - {fileID: 1179430437}
   - {fileID: 1509243885}
   - {fileID: 1652141325}

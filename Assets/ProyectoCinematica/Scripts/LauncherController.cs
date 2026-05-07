@@ -6,7 +6,7 @@ public class LauncherController : MonoBehaviour
     public BallController ballPrefab;
     public Transform spawnPoint;
 
-    private float force = 7f;
+    public float force = 7f;
     public float angle = 45f;
 
     private PlayerInputActions inputActions;
@@ -31,6 +31,16 @@ public class LauncherController : MonoBehaviour
     {
         SpawnBall();
     }
+    private void Update()
+    {
+        Vector3 mousePos = GetMouseWorldPosition(); //1. Obtener la posición del mouse en el mundo
+
+        //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
+        Vector3 direction = mousePos - spawnPoint.position;
+
+        direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
+        force = direction.magnitude * 1.2f;
+    }
 
     void SpawnBall()
     {
@@ -52,7 +62,7 @@ public class LauncherController : MonoBehaviour
 
         //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
         Vector3 direction = mousePos - spawnPoint.position;
-       
+
         direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
         force = direction.magnitude * 1.2f;
         direction.Normalize();
@@ -82,7 +92,7 @@ public class LauncherController : MonoBehaviour
         return launchVelocity;
     }
 
-    Vector3 GetMouseWorldPosition()
+     Vector3 GetMouseWorldPosition()
     {
         Vector2 mouseScreenPosition = inputActions.Gameplay.Position.ReadValue<Vector2>();
 
@@ -93,20 +103,6 @@ public class LauncherController : MonoBehaviour
         float distance = (planeY - ray.origin.y) / ray.direction.y;
 
         return ray.origin + ray.direction * distance;
-
-        //Vector3 worldPosition = ray.origin + ray.direction * distance;
-
-        //Debug.DrawLine(spawnPoint.position, worldPosition, Color.red);
-
-        //return worldPosition;
-        // Plane groundPlane = new Plane(Vector3.up, spawnPoint.position);
-
-        /* if(groundPlane.Raycast(ray, out float distance))
-         {
-             return ray.GetPoint(distance);
-         }
-
-         return spawnPoint.position; */
     }
 
     public void ResetBall()
