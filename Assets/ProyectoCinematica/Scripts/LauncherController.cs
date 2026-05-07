@@ -6,7 +6,7 @@ public class LauncherController : MonoBehaviour
     public BallController ballPrefab;
     public Transform spawnPoint;
 
-    public float force = 10f;
+    private float force = 5.5f;
     public float angle = 45f;
 
     private PlayerInputActions inputActions;
@@ -52,7 +52,9 @@ public class LauncherController : MonoBehaviour
 
         //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
         Vector3 direction = mousePos - spawnPoint.position;
+       
         direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
+        force = direction.magnitude * 1.2f;
         direction.Normalize();
 
         Debug.DrawLine(spawnPoint.position, mousePos, Color.red, 2f);

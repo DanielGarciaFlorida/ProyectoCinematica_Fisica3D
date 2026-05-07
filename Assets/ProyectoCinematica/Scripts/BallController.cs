@@ -12,6 +12,7 @@ public class BallController : MonoBehaviour
     private Vector3 initialVelocity;
     private Vector3 startPosition;
     private float launchTime;
+    private float t;
 
     LauncherController launcher;
     void Awake()
@@ -26,17 +27,29 @@ public class BallController : MonoBehaviour
     {
         if (!isLaunched) return;
 
-        float t = Time.time - launchTime;
+        t += Time.deltaTime;
 
-        Vector3 newPosition = CalculatePosition(t);
-        transform.position = newPosition;
+
+       if (rb.isKinematic)
+        {
+            Vector3 newPosition = CalculatePosition(t);
+            transform.position = newPosition;
+
+            if (Physics.OverlapSphere(transform.position, 0.25f).Length > 1)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                rb.linearVelocity = (CalculatePosition(t + 1f) - CalculatePosition(t));
+            }
+        }
     }
 
-    public void Launch(Vector3 velocity)
+    public void Launch(Vector3 launchVelocity)
     {
+
         rb.isKinematic = true;
 
-        initialVelocity = velocity;
+        initialVelocity = launchVelocity;
         startPosition = transform.position;
         launchTime = Time.time;
 
@@ -50,6 +63,7 @@ public class BallController : MonoBehaviour
         float x = startPosition.x + initialVelocity.x * time;
         float y = startPosition.y + initialVelocity.y * time + 0.5f * gravity * time * time;
         float z = startPosition.z + initialVelocity.z * time;
+
 
         return new Vector3(x, y, z);
     }
@@ -66,7 +80,9 @@ public class BallController : MonoBehaviour
 
             Destroy(gameObject);
         }
+
     }
+
 
     /* Hasta que no metamos el modelo 3D de la mesa no podremos probar esta parte
      void OnCollisionEnter(Collision collision)
