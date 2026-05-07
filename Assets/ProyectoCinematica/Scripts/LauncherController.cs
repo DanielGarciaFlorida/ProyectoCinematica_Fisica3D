@@ -6,7 +6,7 @@ public class LauncherController : MonoBehaviour
     public BallController ballPrefab;
     public Transform spawnPoint;
 
-    private float force = 5.5f;
+    private float force = 7f;
     public float angle = 45f;
 
     private PlayerInputActions inputActions;
