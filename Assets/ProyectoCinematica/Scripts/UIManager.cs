@@ -6,11 +6,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject gameOverPanel;
 
- 
-
     public void RestartButton()
     {
-       
         GameManager.Instance.RestartLevel();
     }
 }

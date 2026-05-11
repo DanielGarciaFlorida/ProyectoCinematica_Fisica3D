@@ -14,7 +14,6 @@ public class BallCounter : MonoBehaviour
     public int totalBalls = 15;
 
     private int ballsInside = 0;
-
     private void Awake()
     {
         Instance = this;
