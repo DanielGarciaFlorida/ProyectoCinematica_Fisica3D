@@ -3,7 +3,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     Rigidbody rb;
-    private bool isLaunched = false;
+    public bool isLaunched;
 
     //Formula tiro parabolico.
     //1.En eje X: x = v0 * cos(alpha) * t.
@@ -86,17 +86,4 @@ public class BallController : MonoBehaviour
         }
 
     }
-
-
-    /* Hasta que no metamos el modelo 3D de la mesa no podremos probar esta parte
-     void OnCollisionEnter(Collision collision)
-     {
-         if (collision.gameObject.CompareTag("Hole"))
-         {
-             Debug.Log("Goal");
-             //llamar al GameManager
-         }
-
-     }
-    */
 }

@@ -246,7 +246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.0372, y: 34.0904}
+  m_AnchoredPosition: {x: 14.03717, y: 34.090393}
   m_SizeDelta: {x: 28.0745, y: 68.1809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618395081
@@ -371,8 +371,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -586,8 +586,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.8571, y: -120.55615}
-  m_SizeDelta: {x: 87.7222, y: 28.6275}
+  m_AnchoredPosition: {x: 23.8286, y: -293}
+  m_SizeDelta: {x: 137.0936, y: 59.2718}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1099230227
 MonoBehaviour:
@@ -635,7 +635,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2145952508}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartLevel
+        m_MethodName: LoadFirstScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1290,6 +1290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204948856}
   - component: {fileID: 1204948857}
+  - component: {fileID: 1204948858}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1327,6 +1328,18 @@ MonoBehaviour:
   counterText: {fileID: 1309701716}
   victoryCanvas: {fileID: 1373952856}
   totalBalls: 1
+--- !u!114 &1204948858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204948854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab80d89c0c8b7144a68118fb70e29d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &1254793123
 GameObject:
   m_ObjectHideFlags: 0

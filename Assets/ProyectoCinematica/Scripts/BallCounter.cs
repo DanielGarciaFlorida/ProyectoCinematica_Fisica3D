@@ -47,8 +47,13 @@ public class BallCounter : MonoBehaviour
     {
         
         int indiceEscenaActual = SceneManager.GetActiveScene().buildIndex;
-
-        
-        SceneManager.LoadScene(indiceEscenaActual + 1);
+        if (indiceEscenaActual == 3)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(indiceEscenaActual + 1);
+        }
     }
 }

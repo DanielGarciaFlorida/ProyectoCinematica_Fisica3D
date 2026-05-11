@@ -23,13 +23,13 @@ public class TrayectoriaBola : MonoBehaviour
 
     void Update()
     {
-        
-        if (bola != null && bola.linearVelocity.magnitude > 0.1f)
+        if (ballController == null) return;
+
+        if(ballController.isLaunched)
         {
             lineRenderer.enabled = false;
             return;
         }
-
         lineRenderer.enabled = true;
         DibujarTrayectoria();
     }
