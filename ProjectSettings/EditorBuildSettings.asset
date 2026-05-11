@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/ProyectoCinematica/Nivel1.unity
+    guid: 76950e3621d7f574fb15c6aad0d5628a
+  - enabled: 1
+    path: Assets/ProyectoCinematica/Nivel2.unity
+    guid: 4742b7260cc17d74fbb0405cf210a2b6
+  - enabled: 1
+    path: Assets/ProyectoCinematica/Nivel3.unity
+    guid: 54eac7f248fbe5549a9ba03ea0a7de0e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

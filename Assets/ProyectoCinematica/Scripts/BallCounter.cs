@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallCounter : MonoBehaviour
 {
@@ -34,11 +35,21 @@ public class BallCounter : MonoBehaviour
         if (ballsInside >= totalBalls)
         {
             victoryCanvas.SetActive(true);
+            PasarSiguienteNivel();
         }
     }
 
     void UpdateUI()
     {
         counterText.text = ballsInside + "/" + totalBalls;
+    }
+
+    public void PasarSiguienteNivel()
+    {
+        
+        int indiceEscenaActual = SceneManager.GetActiveScene().buildIndex;
+
+        
+        SceneManager.LoadScene(indiceEscenaActual + 1);
     }
 }
