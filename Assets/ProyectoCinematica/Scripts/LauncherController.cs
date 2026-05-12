@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class LauncherController : MonoBehaviour
 {
-    public BallController ballPrefab;
+    public BallController ballPrefab; 
     public Transform spawnPoint;
 
     public float force = 7f;
@@ -14,12 +14,12 @@ public class LauncherController : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new PlayerInputActions();
+        inputActions = new PlayerInputActions();  //Inicio el sistema de inputs
     }
     void OnEnable()
     {
         inputActions.Enable();
-        inputActions.Gameplay.Shoot.performed += OnShoot;
+        inputActions.Gameplay.Shoot.performed += OnShoot; //Detecta el input del disparo
     }
 
     void OnDisable()
@@ -38,17 +38,17 @@ public class LauncherController : MonoBehaviour
         //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
         Vector3 direction = mousePos - spawnPoint.position;
 
-        direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
-        force = direction.magnitude * 1.2f;
+        direction.y = 0; // Ignorar la altura para calcular la fuerza horizontal
+        force = direction.magnitude * 1.2f; //La fuerza depende de la distancia del ratón
     }
 
-    void SpawnBall()
+    void SpawnBall() //Instancia la bola en el punto de spawn
     {
         currentBall = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
         currentBall.SetLauncher(this);
     }
 
-    void OnShoot(InputAction.CallbackContext context)
+    void OnShoot(InputAction.CallbackContext context) 
     {
         Debug.Log("CLICK DETECTADO");
         Shoot();
@@ -56,33 +56,35 @@ public class LauncherController : MonoBehaviour
 
     void Shoot()
     {
-        if (currentBall == null) return;
+        if (currentBall == null) return; //Evita disparar si no existe bola
 
         Vector3 mousePos = GetMouseWorldPosition(); //1. Obtener la posición del mouse en el mundo
 
         //2. Calcular la dirección desde el spawnPoint hacia la posición del mouse
         Vector3 direction = mousePos - spawnPoint.position;
 
-        direction.y = 0; // Ignorar la componente vertical para calcular la dirección horizontal
-        force = direction.magnitude * 1.2f;
+        direction.y = 0; 
+        force = direction.magnitude * 1.2f; 
         direction.Normalize();
 
-        Debug.DrawLine(spawnPoint.position, mousePos, Color.red, 2f);
+        Debug.DrawLine(spawnPoint.position, mousePos, Color.red, 2f); //Línea de depuración para comprobar dirección
         Debug.Log("Direccion: " + direction);
 
-        //3.Calcular velocidad parabólica
+        //3.Calcular velocidad inicial parabólica
         Vector3 launchVelocity = CalculatedLaunchVelocity(direction);
 
         currentBall.Launch(launchVelocity); //4. Lanzar la bola
 
     }
 
-    Vector3 CalculatedLaunchVelocity(Vector3 direction)
+    //Calcula velocidad inicial usando angulo y fuerza
+    Vector3 CalculatedLaunchVelocity(Vector3 direction) 
     {
         float angleInRadians = angle * Mathf.Deg2Rad;
 
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
+        //Componente vertical y horizontal de la velocidad
         float vx = force * Mathf.Cos(angleInRadians);
         float vy = force * Mathf.Sin(angleInRadians);
 
@@ -91,7 +93,8 @@ public class LauncherController : MonoBehaviour
 
         return launchVelocity;
     }
-
+    
+    //Convierte la posición del ratón en pantalla a una posición en el mundo
      Vector3 GetMouseWorldPosition()
     {
         Vector2 mouseScreenPosition = inputActions.Gameplay.Position.ReadValue<Vector2>();
@@ -110,7 +113,7 @@ public class LauncherController : MonoBehaviour
         SpawnBall();
     }
 
-    //Necesario para calcular la trayectoria
+    //Devueve la velocidad de lanzamiento para calcular la trayectoria
     public Vector3 GetLaunchVelocity()
     {
         Vector3 mousePos = GetMouseWorldPosition();
