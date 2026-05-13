@@ -112,5 +112,7 @@ En ese momento:
 - Se genera automáticamente una nueva bola.
 - El jugador puede volver a disparar.
 
+## Enlace Gameplay
 
+https://floridauniversitaria-my.sharepoint.com/:f:/g/personal/adroma01_alumnatflorida_es/IgB6eWOcDIWWR4FckrG0ExnlAWMO52eA20QiBKrvUolgL50?e=2XxwCW
 
