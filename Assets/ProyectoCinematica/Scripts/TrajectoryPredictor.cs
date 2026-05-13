@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Asegura que el objeto tenga un LineRenderer para poder dibujar la línea
+
 [RequireComponent(typeof(LineRenderer))]
 public class TrayectoriaBola : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class TrayectoriaBola : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
     }
 
+    // Controla la visibilidad de la trayectoria según si la bola ha sido lanzada o no
     void Update()
     {
         if (ballController == null) return;
@@ -34,6 +37,7 @@ public class TrayectoriaBola : MonoBehaviour
         DibujarTrayectoria();
     }
 
+    // Calcula y dibuja los puntos de la parábola proyectada antes del lanzamiento
     void DibujarTrayectoria()
     {
         lineRenderer.positionCount = 0;

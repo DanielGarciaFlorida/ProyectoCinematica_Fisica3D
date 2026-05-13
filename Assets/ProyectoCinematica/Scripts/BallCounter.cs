@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class BallCounter : MonoBehaviour
 {
+    // Singleton para acceso global y variables de configuración de UI y juego
     public static BallCounter Instance;
 
     [Header("UI")]
@@ -14,6 +15,8 @@ public class BallCounter : MonoBehaviour
     public int totalBalls = 15;
 
     private int ballsInside = 0;
+
+    // Inicialización del Singleton y estado inicial de la UI
     private void Awake()
     {
         Instance = this;
@@ -25,6 +28,7 @@ public class BallCounter : MonoBehaviour
         victoryCanvas.SetActive(false);
     }
 
+    // Lógica principal: registra cada bola, actualiza la UI y verifica la condición de victoria
     public void BallEnteredHole()
     {
         ballsInside++;
@@ -37,12 +41,13 @@ public class BallCounter : MonoBehaviour
             PasarSiguienteNivel();
         }
     }
-
+    // Refresca el texto en pantalla con el conteo actual
     void UpdateUI()
     {
         counterText.text = ballsInside + "/" + totalBalls;
     }
 
+    // Gestiona la transición entre niveles o reinicia el juego al finalizar
     public void PasarSiguienteNivel()
     {
         
